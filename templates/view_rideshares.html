@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Rideshares - Admin AC Rides</title>
+    <link rel="icon" type="image/ico" href="../static/ACS_Logo-nav.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+    <body>
+         {% with current='dashboard', logged=logged, email=current_user %}
+     {% include "header.html" %}
+  {% endwith %}
+      <br><br><br><br><br>
+                <div class="users-div">
+           <h3>{{ type }}({{ num }} users)</h3>
+       </div>
+         <br>
+         <div class="w-75 users-div">
+         <form class="inline" method="get" action="{{ url_for('admin_rideshares') }}">
+        {{ form.csrf_token }}
+             <input name="request_type" type="hidden" value="{{ type }}">
+             {{ form.filter(**{'class':"form-control", 'id':"floatingPassword", 'placeholder':"Search"}) }}
+                   {% for err in form.filter.errors %}
+			<span style="color:red">{{ err }}</span>
+		  {% endfor %}
+             {{ form.type(**{'type':"hidden", 'value':type}) }}
+             {{ form.search_type(**{'class':"form-control", 'id':"floatingPassword", 'placeholder':"Type"}) }}
+                                {% for err in form.search_type.errors %}
+			<span style="color:red">{{ err }}</span>
+		  {% endfor %}
+         <button class="btn btn-secondary w-100 py-2" type="submit">Search</button>
+         </form>
+         </div>
+         <br>
+               {% for car in cars %}
+<div class="w-75 p-5 bg-body-tertiary border rounded-3 wrap-div users-div">
+    {% if type == "requests" %}
+          <a href="{{ url_for('req_info',code=car[1].code) }}"><h4>
+              {{ car[1].email }}'s request
+          </h4></a>
+    {% else %}
+        <a href="{{ url_for('car_info',code=car[1].code) }}"><h4>
+              {{ car[1].owner }}'s car
+          </h4></a>
+    {% endif %}
+          <p>Code: {{ car[1].code}}</p>
+          <p>Days: {{ car[1].days}}</p>
+          <p>Address: {{ car[1].address}}</p>
+          <p>Registered: {{ car[1].registered }}</p>
+    {% if type == "requests" %}
+        <p>Note: {{ car[1].note }}</p>
+    {% endif %}
+    {% if code == None %}
+    <form method="get" action="{{ url_for('admin_rideshares') }}">
+        {% if type == 'requests' %}
+            <input name="request_type" type="hidden" value="cars">
+        {% else %}
+            <input name="request_type" type="hidden" value="requests">
+        {% endif %}
+            <input name="type" type="hidden" value="{{ type }}">
+        <input name="code" type="hidden" value="{{ car[1].code }}">
+        <button class="btn btn-primary w-100 py-2" type="submit">Match</button>
+    </form>
+    {% else %}
+    <p>Distance: {{ car[0] }} degrees</p>
+    <form method="get" action="{{ url_for('matching') }}">
+        <input name="old" type="hidden" value="{{ code }}">
+        <input name="distance" type="hidden" value="{{ car[0] }}">
+        {% if type == 'requests' %}
+            <input name="type" type="hidden" value="cars">
+        {% else %}
+            <input name="type" type="hidden" value="requests">
+        {% endif %}
+        <input name="code" type="hidden" value="{{ car[1].code }}">
+        <button class="btn btn-primary w-100 py-2" type="submit">Match</button>
+    </form>
+    {% endif %}
+</div>
+       <br>
+                {% endfor %}
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</extra>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - AC Rides</title>
+       <link rel="icon" type="image/ico" href="../static/ACS_Logo-nav.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+  </head>
+<body>
+  {% with current='dashboard', logged=logged, email=current_user %}
+     {% include "header.html" %}
+  {% endwith %}
+  <br><br><br><br><br>
+  <div class="container">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-12">
+        <div class="h-100 p-5 bg-body-tertiary bordear rounded-3">
+          <h2> <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle-custom" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+</svg>{{ user.fullname }}'s profile</h2>
+            <h6>This is how people will view your profile</h6>
+            <br>
+            <form method=post enctype=multipart/form-data action="{{ url_for('profile',email=user.email) }}">
+                {{ form.csrf_token }}
+                <div class="inline w-100">
+                    <div class="w-25">
+                        <div id="profile-container" style="background-image: url({{ file_path }})">
+                            {{ form.pfp(**{'class':'transparent'}) }}
+                        </div>
+                        {% for err in form.pfp.errors %}
+                                <span style="color:red">{{ err }}</span>
+                        {% endfor %}
+                        <br>
+                        <button class="btn btn-primary py-2 custom-upload" type="submit">Upload</button>
+                    </div>
+                    <div class="w-75">
+                        <div class="form-floating has-validation">
+                        {{ form.fullname(**{'class':"form-control", 'id':"floatingInput", 'value': user.fullname}) }}
+                        <label for="floatingInputGrid">Full Name</label>
+                        </div>
+                        <br>
+                                                <div class="form-floating has-validation">
+                        {{ form.nickname(**{'class':"form-control", 'id':"floatingInput", 'value': user.nickname}) }}
+                        <label for="floatingInputGrid">Nickname</label>
+                        </div>
+                        <br>
+                            <div class="form-floating has-validation">
+                        {{ form.phone(**{'class':"form-control", 'id':"floatingInput", 'value': user.phone}) }}
+                        <label for="floatingInputGrid">Phone number</label>
+                        </div>
+</div>
+
+                    </div>
+                <br>
+                <button class="btn btn-primary py-2 w-100" type="submit">Save</button>
+                            </form>
+                <br>
+
+                </div>
+      </div>
+
+        </div>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

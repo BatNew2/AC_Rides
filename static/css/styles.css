@@ -1,0 +1,180 @@
+.navbar {
+    background-color: rgb(210, 222, 50) !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+}
+body {
+    background-color: #faf0e6 !important;
+}
+.inline {
+    display: flex;
+}
+.readjust {
+    margin-left: 1%;
+    padding-top: 2.5%;
+}
+#anchor {
+    margin-left: auto;
+}
+html {
+  scroll-behavior: smooth;
+}
+.signup{
+    margin-left:20%;
+}
+invisible-red{
+    opacity: 0.0;
+}
+invisible-black{
+    color: #292b2c;
+}
+.bi-person-circle{
+    margin-top:-3.25%;
+}
+.inline{
+    display:flex;
+}
+.form_ver{
+    width:100%;
+    height:50px;
+    text-align:center;
+    font-size:200%;
+    letter-spacing:10px;
+}
+.container-custom{
+    min-width:90%
+}
+.bi-car-front{
+    margin-top:-3.25%;
+}
+.radio{
+    margin-bottom: 0px
+}
+.custom-bi{
+    margin-bottom:1.75%
+}
+.a-black{
+    color:black;
+}
+.invisible{
+    opacity:0;
+}
+.a-red{
+    color:red;
+}
+.custom-car{
+    margin-bottom:0.5%;
+}
+.wrap-div{
+    word-wrap: break-word;
+}
+.items:hover{
+    opacity: 80%;
+    size: 150%;
+    transform: scale(1.0301);
+    transition: opacity 0.5s;
+    cursor: pointer;
+}
+.bi-person-circle-custom{
+    margin-top:-1%;
+    margin-right:1%;
+}
+#profile-container {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 75%;
+    height: 0;
+    padding-bottom: 75%;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+.transparent{
+    background-color:grey;
+    height:600px;
+    padding-bottom:5
+    width:400px;
+    text-color:grey;
+    font-size:0.001;
+    opacity:0;
+}
+.custom-upload{
+    width:75%;
+}
+.transparent:hover {
+    opacity:0.5;
+    transition: opacity 0.25s ease-in;
+}
+::-webkit-file-upload-button {
+    display: none;
+}
+.transparent-no-opac{
+    background-color:grey;
+    height:600px;
+    padding-bottom:5
+    width:400px;
+    text-color:grey;
+    font-size:0.001;
+    opacity:0;
+}
+.car-custom{
+    margin-right:1%;
+    margin-bottom:0.75%;
+}
+.note{
+    height:200px;
+}
+.users-div{
+    margin-left: 12.5%;
+}
+.users-custom{
+    margin-top:-0.75%;
+    margin-right:0.5%;
+}
+.no-button{
+    background: none;
+    border: none;
+}
+.small-profile{
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 10%;
+    height: 0;
+    padding-bottom: 10%;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+.text-margin{
+    margin-top:1.25%;
+    margin-left:2%;
+    font-size:200%;
+}
+.centered{
+    text
+}
+.ac-bg{
+    width: 100%;
+    height: 100%;
+    margin:0px;
+    align-items: center;
+}
+.why-text{
+    font-family: 'Anton', sans-serif;
+    font-size: 5rem;
+}
+.center-div{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-text: center;
+}

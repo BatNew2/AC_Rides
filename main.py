@@ -1,6 +1,6 @@
 
 
-import flask_session
+# import flask_session
 import sqlalchemy.exc
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String, Boolean, Text
@@ -861,8 +861,9 @@ def matching():
             request=this_request.code,
             registered=str(datetime.datetime.now()),
             admin=session['username'],
-
         )
+        db.session.add(new_match)
+        db.session.commit()
     if not os.path.exists(f"./static/assets/pfp/{car_user.email}.jpg"):
         car_profile = "../../static/person-circle.svg"
     else:

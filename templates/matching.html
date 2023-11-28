@@ -81,7 +81,8 @@
     </div>
           <div class="inline w-100">
                <form class="w-50" method="get" action="{{ url_for('matching') }}">
-                   <textarea id="note" name="note" rows="4" cols="50"></textarea>
+                   <p>Note to users:</p>
+                   <textarea id="note" name="note" rows="4" cols="50" style="width: 100%;">Hi</textarea>
               <br>
                    <input type="hidden" name="old" value="{{ old }}">
               <input type="hidden" name="code" value="{{ code }}">
@@ -91,6 +92,7 @@
                    <button class="btn btn-success py-2 w-100" type="submit">Match</button>
                </form>
                   <form class="w-50" method="get" action="{{ url_for('admin_rideshares') }}">
+                      <br><br><br><br><br><br><br>
                       <input type="hidden" name="code" value="{{ old }}">
                       {% if type == "cars" %}
                         <input type="hidden" name="request_type" value="requests">

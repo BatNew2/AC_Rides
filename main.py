@@ -167,7 +167,7 @@ class PwEmail(FlaskForm):
 
 
 class Login(FlaskForm):
-    email = StringField('email', validators=[DataRequired(), acs_email])
+    email = StringField('email', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired(message="Please fill this field"), Length(min=8, max=50, message="Password must be between 8 to 50 characters long")])
     submit = SubmitField('login')
 
@@ -565,10 +565,7 @@ def dashboard():
         car_code = ""
     else:
         car_code = car.code
-    try:
-        notification = Notifications.query.filter_by(email=session['username']).all()
-    except sqlalchemy.exc.NoResultFound:
-        notifcation = None
+    notification = Notifications.query.filter_by(email=session['username']).all()
     try:
         req = Requests.query.filter_by(email=session['username']).one()
     except sqlalchemy.exc.NoResultFound:
@@ -898,6 +895,8 @@ def matching():
             body=f'To check request information please open this link: acsrides.com/matches/{code}',
             code=get_random()
         )
+        db.session.add(car_notif)
+        db.session.add(request_notif)
         db.session.commit()
     if not os.path.exists(f"./static/assets/pfp/{car_user.email}.jpg"):
         car_profile = "../../static/person-circle.svg"

@@ -7,7 +7,11 @@
 
 }
 body {
+    height: 100vh
     background-color: #faf0e6 !important;
+}
+html {
+    height: 100%
 }
 .inline {
     display: flex;
@@ -180,4 +184,21 @@ invisible-black{
 }
 .back-btn{
     margin-top:1.5%;
+}
+.bottom-border{
+    border-bottom: 1px solid #333333;
+}
+.index-background{
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(../Hero-Background.png);
+}
+.arrow-down{
+    width: 100vh;
+    background-size: 10% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../arrow-down.png);
 }

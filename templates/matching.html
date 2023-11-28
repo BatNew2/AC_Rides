@@ -82,7 +82,7 @@
           <div class="inline w-100">
                <form class="w-50" method="get" action="{{ url_for('matching') }}">
                    <p>Note to users:</p>
-                   <textarea id="note" name="note" rows="4" cols="50" style="width: 100%;">Hi</textarea>
+                   <textarea class="form-control" id="note" name="note" rows="4" cols="50" style="width: 200%;">Hi</textarea>
               <br>
                    <input type="hidden" name="old" value="{{ old }}">
               <input type="hidden" name="code" value="{{ code }}">
@@ -100,7 +100,7 @@
                         <input type="hidden" name="request_type" value="requests">
                       {% endif %}
                       <input type="hidden" name="type" value="{{ type }}">
-                      <button class="btn btn-danger py-2 w-100">Back</button>
+                      <button class="btn btn-danger py-2 w-100 back-btn">Back</button>
                   </form>
           </div>
           <br>

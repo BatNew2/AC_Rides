@@ -145,6 +145,7 @@ class Matches(db.Model):
     days: Mapped[str] = mapped_column(String, nullable=False)
     car_user: Mapped[str] = mapped_column(String, nullable=False)
     car: Mapped[str] = mapped_column(String, nullable=False)
+    admin: Mapped[str] = mapped_column(String, nullable=False)
     request: Mapped[str] = mapped_column(String, nullable=False)
     request_user: Mapped[str] = mapped_column(String, nullable=False)
     registered: Mapped[str] = mapped_column(String, nullable=False)

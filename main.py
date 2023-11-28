@@ -96,7 +96,8 @@ class Admins(db.Model):
 class Notifications(db.Model):
     id: Mapped[int] = mapped_column(Integer, autoincrement=True, primary_key=True)
     email: Mapped[str] = mapped_column(String, nullable=False)
-    notifications = mapped_column(Text, nullable=True)
+    name: Mapped[str] = mapped_column(Text, nullable=False)
+    body: Mapped[str] = mapped_column(Text, nullable=False)
     code: Mapped[str] = mapped_column(String, nullable=False, unique=True)
 
 
@@ -148,6 +149,7 @@ class Matches(db.Model):
     admin: Mapped[str] = mapped_column(String, nullable=False)
     request: Mapped[str] = mapped_column(String, nullable=False)
     request_user: Mapped[str] = mapped_column(String, nullable=False)
+    code: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     registered: Mapped[str] = mapped_column(String, nullable=False)
     note: Mapped[str] = mapped_column(String, nullable=True)
 
@@ -855,15 +857,42 @@ def matching():
     except sqlalchemy.exc.NoResultFound:
         return "one of codes wrong please retry"
     if request.args.get('match') == "yes":
+        code = get_random()
         new_match = Matches(
             car_user=car_user.email,
             car=this_car.code,
+            code=code,
             request_user=request_user.email,
             request=this_request.code,
             registered=str(datetime.datetime.now()),
             admin=session['username'],
         )
         db.session.add(new_match)
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user="acrides.help@gmail.com", password="vdfjaerevsebqyza")
+            connection.sendmail(
+                from_addr="acrides.help@gmail.com",
+                to_addrs=car_user.email,
+                msg=f"Subject: We have found a match for your RideShare!\n\nHello AC Rides User! \n\nWe have found matched your RideShare with another user.\nFor more information go to acsrides.com/dashboard and check your notification."
+            )
+            connection.sendmail(
+                from_addr="acrides.help@gmail.com",
+                to_addrs=request_user.email,
+                msg=f"Subject: We have found a RideShare!\n\nHello AC Rides User! \n\nWe have found matched your request with a RideShare.\nFor more information go to acsrides.com/dashboard and check your notifications."
+            )
+        car_notif = Notifications(
+            email=car_user.email,
+            name="We have found a request for you!",
+            body=f'To check request information please open this link: acsrides.com/matches/{code}',
+            code=get_random()
+        )
+        request_notif = Notifications(
+            email=request_user.email,
+            name="We have found a RideShare for you!",
+            body=f'To check request information please open this link: acsrides.com/matches/{code}',
+            code=get_random()
+        )
         db.session.commit()
     if not os.path.exists(f"./static/assets/pfp/{car_user.email}.jpg"):
         car_profile = "../../static/person-circle.svg"

@@ -449,6 +449,7 @@ class CarForm(FlaskForm):
     wednesday = RadioField('days', choices=["Wednesday"], validators=[Optional()])
     thursday = RadioField('days', choices=["Thursday"], validators=[Optional()])
     friday = RadioField('days', choices=["Friday"], validators=[Optional()])
+    note = TextAreaField('note', render_kw={"rows": 70, "cols": 11}, validators=[Optional()])
     password = StringField('password', validators=[DataRequired(message="Please fill this field"), Length(min=8, max=50, message="Password must be between 8 to 50 characters long")])
 
 
@@ -565,12 +566,16 @@ def dashboard():
     else:
         car_code = car.code
     try:
+        notification = Notifications.query.filter_by(email=session['username']).all()
+    except sqlalchemy.exc.NoResultFound:
+        notifcation = None
+    try:
         req = Requests.query.filter_by(email=session['username']).one()
     except sqlalchemy.exc.NoResultFound:
         request_code = ""
     else:
         request_code = req.code
-    return render_template("dashboard.html", car_code=car_code, car="Your RideShare", logged=check_logged(), user=session["username"], req_code=request_code)
+    return render_template("dashboard.html", car_code=car_code, car="Your RideShare", logged=check_logged(), user=session["username"], req_code=request_code, notification=notification)
 
 
 @app.route('/car/<code>/remove')

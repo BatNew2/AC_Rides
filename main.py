@@ -5,7 +5,7 @@ import sqlalchemy.exc
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String, Boolean, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from flask import Flask, render_template, redirect, url_for, session, flash, request
+from flask import Flask, render_template, redirect, url_for, session, request
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from wtforms import StringField, SubmitField, SelectField, RadioField, FileField, TextAreaField
@@ -40,7 +40,7 @@ def get_random():
 
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "33dc65055bcf34dea0ebc3ee2fb9f5e2dd5613c8fcb7f5a9c7c4cf9e89eb4c28"
+app.config["SECRET_KEY"] = os.getenv('FLASK_KEY')
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ac_rides.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SESSION_TYPE"] = 'sqlalchemy'

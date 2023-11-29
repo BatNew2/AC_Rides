@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:display=swap');
+
+.index-font {
+    font-family: 'Anton', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 3vw;
+    font-weight: 500;
+}
+@keyframes fade-inout{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.special-font {
+    opacity: 0;
+    font-weight: 900;
+    animation: fade-inout 1.5s forwards;
+    animation-delay: 0.5s;
+}
+.normal-text {
+    opacity: 0;
+    animation: fade-inout 1.5s forwards;
+    animation-delay: 2s;
+}
+.first {
+    animation: fade-inout 1.5s forwards;
+    animation-delay: 0.5s;
+}
+.second{
+    animation: fade-inout 1.5s forwards;
+    animation-delay: 0.75s;
+}
+.green-special{
+    color: 	#aad688;
+    animation: fade-inout 1.5s forwards;
+    animation-delay: 3.5s;
+    font-size: 3.5vw;
+}
